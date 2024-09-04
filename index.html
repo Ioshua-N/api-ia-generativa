@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <html lang = "pt-br">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <title>ATV2 High Tech</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Gerador de Descrição para Produto</h1>
+
+        <label for1 = "apiKey">Insira sua chave API:</label>
+        <input type = "text" id = "apiKey" placeholder = "Sua chave API">
+
+        <label for = "product">Selecione um produto:</label>
+        <select id = "product">
+            <option value = "">--Selecione um produto--</option>
+            <option value = "1">Laptop - GAMER</option>
+            <option value = "2">Celular - Nokia Tijolão</option>
+            <option value = "3">Fone Bluetooth - Cancelador de ouvidos</option>
+            <option value = "4">Smartwatch - (PROMOÇÃO Pague 2 Leve 1)</option>
+        </select>
+
+        <button onclick = "generateDescription()">Generate Description</button>
+
+        <div id = "description"></div>
+        <div id = "error"></div>
+
+        <script src = "script.js"></script>
+    </body>
+</html>

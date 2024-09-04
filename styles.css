@@ -1,0 +1,19 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+label, select, button, input {
+    display: block;
+    margin: 10px 0;
+}
+#description {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 100px;
+}
+#error {
+    color: red;
+    margin-top: 10px;
+}
