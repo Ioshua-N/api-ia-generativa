@@ -40,7 +40,7 @@ Este projeto é uma aplicação web simples que gera descrições de produtos us
 
 ## Links
 
-- [Visualizar o Projeto](https://ioshua-n.github.io/api-ia-generativa-hightech/){:target="_blank"}
+- <a href="https://ioshua-n.github.io/api-ia-generativa-hightech/" target="_blank">Visualizar o Projeto</a>
 
 ## Licença
 
