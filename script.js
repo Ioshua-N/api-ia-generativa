@@ -1,6 +1,4 @@
-
-async function generateDescription() 
-{
+async function generateDescription() {
     const apiKey = document.getElementById('apiKey').value;
     const product = document.getElementById('product').value;
     const descriptionElement = document.getElementById('description');
@@ -9,83 +7,66 @@ async function generateDescription()
     descriptionElement.innerText = '';
     errorElement.innerText = '';
 
-    if (!apiKey) 
-    {
+    if (!apiKey) {
         alert('Please enter your API key.');
         return;
     }
-    if (!product) 
-    {
+    if (!product) {
         alert('Please select a product.');
         return;
     }
 
-    const products = 
-    {
-        "1": 
-        {
-            "name": "Laptop - High Performance",
+    const products = {
+        "1": {
+            "name": "Laptop - GAMER",
             "category": "Electronics",
             "features": "16GB RAM, 512GB SSD, Intel i7"
         },
-        "2": 
-        {
-            "name": "Smartphone - Mid-range",
+        "2": {
+            "name": "Celular - Nokia Tijolão",
             "category": "Electronics",
             "features": "6GB RAM, 128GB Storage, Snapdragon Processor"
         },
-        "3": 
-        {
-            "name": "Wireless Headphones - Noise Cancelling",
+        "3": {
+            "name": "Fone Bluetooth - Cancelador de ouvidos",
             "category": "Accessories",
             "features": "Active Noise Cancelling, Bluetooth 5.0, 20h Battery Life"
         },
-        "4": 
-        {
-            "name": "Smartwatch - Fitness Tracker",
+        "4": {
+            "name": "Smartwatch - (PROMOÇÃO Pague 2 Leve 1)",
             "category": "Wearables",
             "features": "Heart Rate Monitor, GPS, Waterproof"
         }
     };
 
     const selectedProduct = products[product];
-    const prompt = `You are a marketing expert. Write a compelling product description for a ${selectedProduct.name} in the ${selectedProduct.category} category. Highlight its key features: ${selectedProduct.features}. The description should be engaging and suitable for an e-commerce website.`;
+    const prompt = `Você é fera no marketing. Escreva uma descrição para um produto muito convincente para um ${selectedProduct.name} na categoria ${selectedProduct.category}. Saliente as características chaves: ${selectedProduct.features}. A descrição deve ser relevante e se enquadrar em um e-commerce website.`;
 
-    try 
-    {
-        const response = await fetch('https://api.google.com/v1/gemini/generate', 
-        {
+    try {
+        const response = await fetch('http://localhost:3000/proxy', {
             method: 'POST',
-            headers: 
-            {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(
-            {
-                prompt: prompt,
-                max_tokens: 150
+            body: JSON.stringify({
+                apiKey: apiKey,
+                prompt: prompt
             })
         });
 
-        if (!response.ok) 
-        {
-            throw new Error(`API request failed with status ${response.status}`);
-        }
-
         const data = await response.json();
+        
+        // Log da resposta para verificar o formato
+        console.log(data);
 
-        if (data.choices && data.choices[0] && data.choices[0].text) 
-        {
-            descriptionElement.innerText = data.choices[0].text.trim();
-        } 
-        else 
-        {
+        // Verifique o formato correto para acessar o texto da resposta
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+            descriptionElement.innerText = data.candidates[0].content.parts[0].text.trim();
+        } else {
             throw new Error('Invalid API response format.');
         }
-    } 
-    catch (error) 
-    {
+        
+    } catch (error) {
         errorElement.innerText = `Error: ${error.message}`;
     }
 }
